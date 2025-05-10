@@ -14,6 +14,10 @@
 		"ls_restapi_earthquake_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary"
+		},
+		"trigger_earthquake_daily_ingestion_properties_pl_ingest_raw_data_parameters_relative_url": {
+			"type": "string",
+			"defaultValue": "all_day.geojson"
 		}
 	},
 	"variables": {
@@ -188,6 +192,46 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_restapi')]",
 				"[concat(variables('factoryId'), '/datasets/ds_eqa_braonze_layer')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger_earthquake_daily_ingestion')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pl_ingest_raw_data",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"relative_url": "[parameters('trigger_earthquake_daily_ingestion_properties_pl_ingest_raw_data_parameters_relative_url')]"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2025-05-10T05:37:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								0
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_ingest_raw_data')]"
 			]
 		}
 	]
