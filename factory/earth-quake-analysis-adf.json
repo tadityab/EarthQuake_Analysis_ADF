@@ -1,0 +1,9 @@
+{
+	"name": "earth-quake-analysis-adf",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "774589d8-725f-4dcb-86e5-ac2c49c44cb5",
+		"tenantId": "f8542750-42ef-4300-a8d9-8683cd54ada1"
+	}
+}
