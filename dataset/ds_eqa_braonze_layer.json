@@ -1,0 +1,18 @@
+{
+	"name": "ds_eqa_braonze_layer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_earthquake_analysis_storage_gen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "bronze-layer"
+			}
+		},
+		"schema": {}
+	}
+}
